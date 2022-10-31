@@ -1,0 +1,32 @@
+<div class="row">
+    <app-member-detail class="col-3" *ngFor="let member of members" [member]="member">
+    </app-member-detail>
+</div>
+<!-- <table class="container table table-striped table-bordered table-hover">
+    <thead>
+        <th>Username</th>
+        <th>Email</th>
+        <th>KnowAs</th>
+        <th>Gender</th>
+        <th>Name</th>
+        <th>Introduction</th>
+        <th>City</th>
+        <th>Avatar</th>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let member of members">
+            <td>{{ member.username }}</td>
+            <td>{{ member.email }}</td>
+            <td>{{ member.age }}</td>
+            <td>{{ member.knowAs }}</td>
+            <td>{{ member.gender }}</td>
+            <td>{{ member.introduction }}</td>
+            <td>{{ member.city }}</td>
+            <td>
+                <img src="{{member.avatar}}" alt="Avatar" class="h-56 rounded-5 m-auto"
+                    style="border-radius: 15px">
+            </td>
+        </tr>
+    </tbody>
+</table> -->
