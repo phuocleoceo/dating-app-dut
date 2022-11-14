@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Member } from '../_models/member';
 import { MemberService } from '../_services/member.service';
 
@@ -12,6 +12,7 @@ export class MemberDetailComponent implements OnInit {
   @Input() member: Member | null = null;
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private memberService: MemberService,
   ) { }
 
@@ -29,5 +30,13 @@ export class MemberDetailComponent implements OnInit {
         );
       }
     }
+  }
+
+  goToDetail(username: string) {
+    this.router.navigate([`member-detail/${username}`]);
+  }
+
+  follow(username: string) {
+
   }
 }

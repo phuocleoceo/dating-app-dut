@@ -8,10 +8,10 @@
         <p class="card-text">
             {{ member.introduction }}
         </p>
-        <a href="/member-detail/{{ member.username }}" class="btn btn-primary">
+        <a (click)="goToDetail(member.username)" class="btn btn-primary">
             More info
         </a>
-        <a href="/member-detail/{{ member.username }}" class="btn btn-success float-end">
+        <a (click)="follow(member.username)" class="btn btn-success float-end">
             Follow
         </a>
     </div>
