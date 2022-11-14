@@ -20,7 +20,6 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    // console.log(this.registerUser);
     this.accountService.register(this.registerUser)
       .subscribe(response => {
         console.log(response);

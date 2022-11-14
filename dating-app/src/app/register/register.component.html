@@ -5,21 +5,50 @@
                 <div class="card shadow-2-strong card-registration" style="border-radius: 15px">
                     <div class="card-body p-4 p-md-5">
                         <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
-                        <form>
+                        <form #registerForm="ngForm" (ngSubmit)="register()">
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
                                         <input type="text" id="username" name="username" class="form-control"
-                                            [(ngModel)]="registerUser.username" />
+                                            [(ngModel)]="registerUser.username" #username="ngModel" required
+                                            minlength="4" maxlength="32" appForbiddenName="bob">
                                         <label class="form-label" for="username">Username</label>
+                                    </div>
+
+                                    <div *ngIf="username.invalid && (username.dirty || username.touched)"  class="text-danger">
+                                        <div *ngIf="username.errors?.['required']">
+                                            UserName is required.
+                                        </div>
+                                        <div *ngIf="username.errors?.['minlength']">
+                                            UserName must be at least 4 characters long.
+                                        </div>
+                                        <div *ngIf="username.errors?.['maxlength']">
+                                            UserName must be at max 32 characters long.
+                                        </div>
+                                        <div *ngIf="username.errors?.['forbiddenName']">
+                                            UserName cannot be Bob.
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
                                         <div class="form-outline">
                                             <input type="password" id="password" name="password" class="form-control"
-                                                [(ngModel)]="registerUser.password" />
+                                                [(ngModel)]="registerUser.password" #password="ngModel" required
+                                                minlength="4" maxlength="32" />
                                             <label class="form-label" for="password">Password</label>
+                                        </div>
+                                    </div>
+
+                                    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger">
+                                        <div *ngIf="password.errors?.['required']">
+                                            Password is required.
+                                        </div>
+                                        <div *ngIf="password.errors?.['minlength']">
+                                            Password must be at least 4 characters long.
+                                        </div>
+                                        <div *ngIf="password.errors?.['maxlength']">
+                                            Password must be at max 32 characters long.
                                         </div>
                                     </div>
                                 </div>
@@ -52,7 +81,7 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <select class="select form-control" name="gender" [(ngModel)]="registerUser.gender">
-                                        <option value="" disabled>Choose option</option>
+                                        <option value="" disabled>---Choose gender---</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                     </select>
@@ -89,7 +118,8 @@
                                 </div>
                             </div>
                             <div class="mt-4 pt-2">
-                                <input class="btn btn-primary" type="button" (click)="register()" value="Submit" />
+                                <input class="btn btn-primary" type="submit" [disabled]="registerForm.invalid"
+                                    value="Submit" />
                             </div>
                         </form>
                     </div>
@@ -98,70 +128,3 @@
         </div>
     </div>
 </section>
-
-
-<!-- <section class="section-content padding-y">
-    <div class="card mx-auto" style="max-width:600px">
-        <article class="card-body">
-            <header class="mb-4">
-                <h4 class="card-title">Register</h4>
-            </header>
-            <form method="post">
-                <div class="form-row">
-                    <div class="col form-group">
-                        <label>Your name</label>
-                        <input class="form-control" type="text" name="knowAs" [(ngModel)]="registerUser.knowAs">
-                    </div>
-
-                    <div class="col form-group">
-                        <label>Username</label>
-                        <input class="form-control" type="text" name="username" [(ngModel)]="registerUser.username">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>password</label>
-                    <input class="form-control" type="password" name="password" [(ngModel)]="registerUser.password">
-                </div>
-
-                <div class="form-group">
-                    <label>date of birth</label>
-                    <input class="form-control" type="text" name="birthday" [(ngModel)]="registerUser.dateOfBirth">
-                </div>
-
-                <div class="form-group">
-                    <label>Email</label>
-                    <input class="form-control" type="text" name="email" [(ngModel)]="registerUser.email">
-                </div>
-
-                <div class="form-group">
-                    <label>gender</label>
-                    <select class="form-control" [(ngModel)]="registerUser.gender">
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>introduction</label>
-                    <input class="form-control" type="text" name="introduction" [(ngModel)]="registerUser.introduction">
-                </div>
-                <div class="form-group">
-                    <label>city</label>
-                    <input class="form-control" type="text" name="city" [(ngModel)]="registerUser.city">
-                </div>
-                <div class="form-group">
-                    <label>avatar</label>
-                    <input class="form-control" type="text" name="avatar" [(ngModel)]="registerUser.avatar">
-                </div>
-
-                <div class="form-group">
-                    <button type="button" (click)="register()" class="btn btn-primary btn-block"> Register </button>
-                </div>
-            </form>
-        </article>
-    </div>
-    <p class="text-center mt-4">
-        You have already a account ? <a href="/user/login">Login now </a>
-    </p>
-    <br><br>
-</section> -->
