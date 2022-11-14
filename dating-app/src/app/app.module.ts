@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { MembersComponent } from './members/members.component';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { MemberDetailComponent } from './member-detail/member-detail.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { MemberDetailComponent } from './member-detail/member-detail.component';
     NavbarComponent,
     MembersComponent,
     MemberDetailComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

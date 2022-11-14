@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   name = 'phuocleoceo';
 
   constructor(
-    private accountService: AccountService,
+    public accountService: AccountService,
   ) { }
 
   ngOnInit(): void {

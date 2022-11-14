@@ -1,4 +1,4 @@
-import { AuthUser, UserToken } from '../_models/app-user';
+import { AuthUser, RegisterUser, UserToken } from '../_models/app-user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -35,15 +35,24 @@ export class AccountService {
         localStorage.removeItem('userToken');
     }
 
-    register(authUser: AuthUser) {
-
-    }
-
     reLogin() {
         let storageUser = localStorage.getItem('userToken');
         if (storageUser) {
             const userToken = JSON.parse(storageUser);
             this.currentUser.next(userToken);
         }
+    }
+
+    register(registerUser: RegisterUser) {
+        return this.httpClient.post(`${this.baseUrl}/register`, registerUser, {
+            responseType: 'text',
+            headers: this.headers,
+        }).pipe(map((token: string) => {
+            if (token) {
+                const userToken: UserToken = { username: registerUser.username, token }
+                localStorage.setItem('userToken', JSON.stringify(userToken));
+                this.currentUser.next(userToken);
+            }
+        }));
     }
 }
